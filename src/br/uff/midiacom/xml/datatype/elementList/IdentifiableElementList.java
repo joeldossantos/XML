@@ -1,5 +1,6 @@
 package br.uff.midiacom.xml.datatype.elementList;
 
+import br.uff.midiacom.xml.XMLElement;
 import br.uff.midiacom.xml.XMLException;
 import br.uff.midiacom.xml.XMLIdentifiableElement;
 
@@ -10,8 +11,10 @@ import br.uff.midiacom.xml.XMLIdentifiableElement;
  *
  * @param <T>
  *          the type of element stored in the list.
+ * @param <P>
+ *          type of the stored element parent.
  */
-public class IdentifiableElementList<T extends XMLIdentifiableElement> extends ElementList<T> {
+public class IdentifiableElementList<T extends XMLIdentifiableElement, P extends XMLElement> extends ElementList<T, P> {
 
 
     /**

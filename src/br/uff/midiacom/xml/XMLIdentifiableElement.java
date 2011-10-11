@@ -6,8 +6,10 @@ package br.uff.midiacom.xml;
  *
  * @param <T>
  *          XML element type.
+ * @param <P>
+ *          XML element parent type.
  */
-public interface XMLIdentifiableElement<T extends XMLIdentifiableElement> extends XMLElement<T> {
+public interface XMLIdentifiableElement<T extends XMLIdentifiableElement, P extends XMLElement> extends XMLElement<T, P> {
 
 
     /**

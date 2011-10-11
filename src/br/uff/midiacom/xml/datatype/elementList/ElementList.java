@@ -14,8 +14,10 @@ import java.util.List;
  *
  * @param <T>
  *          the type of element stored in the list.
+ * @param <P>
+ *          type of the stored element parent.
  */
-public class ElementList<T extends XMLElement> implements Iterable<T> {
+public class ElementList<T extends XMLElement, P extends XMLElement> implements Iterable<T> {
 
     protected List<T> elements;
 
@@ -84,12 +86,14 @@ public class ElementList<T extends XMLElement> implements Iterable<T> {
      *
      * @param element
      *          element to be added.
+     * @param parent
+     *          element new parent.
      * @return
      *          true if the element was added to the list.
      * @throws XMLException
      *          if the element is null.
      */
-    public boolean add(T element) throws XMLException {
+    public boolean add(T element, P parent) throws XMLException {
         if(element == null)
             throw new XMLException("Null element.");
 
@@ -98,7 +102,11 @@ public class ElementList<T extends XMLElement> implements Iterable<T> {
                 elements.remove(el);
         }
 
-        return elements.add(element);
+        if(elements.add(element)){
+            element.setParent(parent);
+            return true;
+        }
+        return false;
     }
     
 
@@ -116,7 +124,11 @@ public class ElementList<T extends XMLElement> implements Iterable<T> {
         if(element == null)
             throw new XMLException("Null element.");
 
-        return elements.remove(element);
+        if(elements.remove(element)){
+            element.setParent(null);
+            return true;
+        }
+        return false;
     }
 
 

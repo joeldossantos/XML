@@ -6,8 +6,10 @@ package br.uff.midiacom.xml;
  *
  * @param <T>
  *          XML element type.
+ * @param <P>
+ *          XML element parent type.
  */
-public interface XMLElement<T extends XMLElement> {
+public interface XMLElement<T extends XMLElement, P extends XMLElement> {
 
 
     /**
@@ -19,7 +21,7 @@ public interface XMLElement<T extends XMLElement> {
      *          true if the parent element was defined. If the element already
      *          has a parent element it returns false.
      */
-    public boolean setParent(T parent);
+    public boolean setParent(P parent);
 
 
     /**
@@ -28,7 +30,7 @@ public interface XMLElement<T extends XMLElement> {
      * @return
      *          element representing the parent element.
      */
-    public T getParent();
+    public P getParent();
 
 
     /**

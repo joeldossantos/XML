@@ -1,7 +1,7 @@
 package br.uff.midiacom.xml;
 
 
-public class XMLElementImpl extends Element<XMLElementImpl> {
+public class XMLElementImpl extends XMLElementPrototype<XMLElementImpl, XMLElement> {
 
     private String id;
 

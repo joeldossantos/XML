@@ -1,7 +1,7 @@
 package br.uff.midiacom.xml.datatype.reference;
 
 import br.uff.midiacom.xml.XMLException;
-import br.uff.midiacom.xml.IdentifiableElement;
+import br.uff.midiacom.xml.XMLIdentifiableElementPrototype;
 
 
 /**
@@ -12,7 +12,7 @@ import br.uff.midiacom.xml.IdentifiableElement;
  * @param <E>
  *          the type of the referred element.
  */
-public class IdRefType<E extends IdentifiableElement> extends ReferenceType<E> {
+public class IdRefType<E extends XMLIdentifiableElementPrototype> extends ReferenceType<E> {
 
 
     /**
