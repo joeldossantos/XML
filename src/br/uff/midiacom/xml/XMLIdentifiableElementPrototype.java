@@ -1,7 +1,5 @@
 package br.uff.midiacom.xml;
 
-import br.uff.midiacom.xml.datatype.string.StringType;
-
 
 /**
  * Class that implements the XMLIdentifiableElement interface.
@@ -11,37 +9,28 @@ import br.uff.midiacom.xml.datatype.string.StringType;
  * @param <P>
  *          XML element parent type.
  */
-public abstract class XMLIdentifiableElementPrototype<T extends XMLIdentifiableElement, P extends XMLElement> extends XMLElementPrototype<T, P> implements XMLIdentifiableElement<T, P> {
+public abstract class XMLIdentifiableElementPrototype<T extends XMLIdentifiableElement, P extends XMLElement, I extends XMLElementImpl>
+        extends XMLElementPrototype<T, P, I> implements XMLIdentifiableElement<T, P> {
 
-    protected StringType id;
+    protected I impl;
+
+
+    public XMLIdentifiableElementPrototype() {
+        impl = (I) new XMLElementImpl<T, P>();
+    }
 
 
     public void setId(String id) throws XMLException {
-        if(!validate(id))
-            throw new XMLException("Invalid identifier");
-
-        this.id = new StringType(id);
+        impl.setId(id);
     }
 
 
     public String getId() {
-        return id.getValue();
+        return impl.getId();
     }
 
 
     public boolean compare(T other) {
-        return id.getValue().equals(other.getId());
+        return impl.compare(other);
     }
-
-
-    /**
-     * Validates the id String to check if it is in accordance with the XML
-     * language definition.
-     *
-     * @param id
-     *          string representing the id to be validated.
-     * @return
-     *          true id the id is valid and false otherwise.
-     */
-    protected abstract boolean validate(String id);
 }

@@ -89,7 +89,7 @@ public class ArrayType {
      * @return
      *          String representing the array.
      */
-    private String parse() {
+    public String parse() {
         String result = "";
         for(int i = 0; i < values.length; i++){
             result += values[i];

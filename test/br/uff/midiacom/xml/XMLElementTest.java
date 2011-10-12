@@ -7,24 +7,24 @@ import static org.junit.Assert.*;
 
 public class XMLElementTest {
 
-    private ElementList<XMLElementImpl, XMLElement> list;
+    private ElementList<XMLElementImplementation, XMLElement> list;
 
 
     public XMLElementTest() {
-        list = new ElementList<XMLElementImpl, XMLElement>();
+        list = new ElementList<XMLElementImplementation, XMLElement>();
     }
 
 
     @Test
     public void testCompare() throws XMLException {
-        list.add(new XMLElementImpl("a"), null);
-        list.add(new XMLElementImpl("b"), null);
-        list.add(new XMLElementImpl("c"), null);
-        list.add(new XMLElementImpl("d"), null);
-        list.add(new XMLElementImpl("c"), null);
+        list.add(new XMLElementImplementation("a"), null);
+        list.add(new XMLElementImplementation("b"), null);
+        list.add(new XMLElementImplementation("c"), null);
+        list.add(new XMLElementImplementation("d"), null);
+        list.add(new XMLElementImplementation("c"), null);
 
         String aux = "";
-        for(XMLElementImpl el : list)
+        for(XMLElementImplementation el : list)
             aux += el.getId();
 
         String expected = "abdc";

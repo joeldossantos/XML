@@ -1,12 +1,13 @@
 package br.uff.midiacom.xml;
 
 
-public class XMLElementImpl extends XMLElementPrototype<XMLElementImpl, XMLElement> {
+public class XMLElementImplementation extends XMLElementPrototype<XMLElementImplementation, XMLElement, XMLElementImpl> {
 
     private String id;
 
 
-    public XMLElementImpl(String id) {
+    public XMLElementImplementation(String id) {
+        super();
         this.id = id;
     }
 
@@ -16,8 +17,7 @@ public class XMLElementImpl extends XMLElementPrototype<XMLElementImpl, XMLEleme
     }
 
 
-    @Override
-    public boolean compare(XMLElementImpl other) {
+    public boolean compare(XMLElementImplementation other) {
         return id.equals(other.getId());
     }
 
