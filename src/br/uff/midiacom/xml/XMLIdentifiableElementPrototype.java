@@ -12,11 +12,9 @@ package br.uff.midiacom.xml;
 public abstract class XMLIdentifiableElementPrototype<T extends XMLIdentifiableElement, P extends XMLElement, I extends XMLElementImpl>
         extends XMLElementPrototype<T, P, I> implements XMLIdentifiableElement<T, P> {
 
-    protected I impl;
 
-
-    public XMLIdentifiableElementPrototype() {
-        impl = (I) new XMLElementImpl<T, P>();
+    public XMLIdentifiableElementPrototype() throws XMLException {
+        super();
     }
 
 
@@ -32,5 +30,11 @@ public abstract class XMLIdentifiableElementPrototype<T extends XMLIdentifiableE
 
     public boolean compare(T other) {
         return impl.compare(other);
+    }
+
+
+    @Override
+    protected void createImpl() throws XMLException {
+        impl = (I) new XMLElementImpl<T, P>();
     }
 }

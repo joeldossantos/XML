@@ -21,7 +21,10 @@ public class XMLElementImpl<T extends XMLIdentifiableElement, P extends XMLEleme
 
 
     public String getId() {
-        return id.getValue();
+        if(id != null)
+            return id.getValue();
+        else
+            return null;
     }
 
 

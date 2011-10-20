@@ -15,8 +15,8 @@ public abstract class XMLElementPrototype<T extends XMLElement, P extends XMLEle
     protected I impl;
 
 
-    public XMLElementPrototype() {
-        impl = (I) new XMLElementImpl<XMLIdentifiableElement, P>();
+    public XMLElementPrototype() throws XMLException {
+        createImpl();
     }
 
 
@@ -27,5 +27,10 @@ public abstract class XMLElementPrototype<T extends XMLElement, P extends XMLEle
 
     public P getParent() {
         return (P) impl.getParent();
+    }
+
+
+    protected void createImpl() throws XMLException {
+        impl = (I) new XMLElementImpl<XMLIdentifiableElement, P>();
     }
 }
