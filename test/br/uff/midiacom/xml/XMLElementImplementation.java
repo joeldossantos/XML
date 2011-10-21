@@ -6,7 +6,7 @@ public class XMLElementImplementation extends XMLElementPrototype<XMLElementImpl
     private String id;
 
 
-    public XMLElementImplementation(String id) {
+    public XMLElementImplementation(String id) throws XMLException {
         super();
         this.id = id;
     }
