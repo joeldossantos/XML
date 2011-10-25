@@ -98,8 +98,10 @@ public class ElementList<T extends XMLElement, P extends XMLElement> implements 
             throw new XMLException("Null element.");
 
         for(T el : elements){
-            if(el.compare(element))
+            if(el.compare(element)){
                 elements.remove(el);
+                break;
+            }
         }
 
         if(elements.add(element)){

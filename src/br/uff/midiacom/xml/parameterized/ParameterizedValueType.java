@@ -4,10 +4,11 @@ import br.uff.midiacom.xml.XMLElement;
 import br.uff.midiacom.xml.XMLException;
 
 
-public abstract class ParameterizedValueType<T extends ParameterizedValueType, V, P extends XMLElement> {
+public abstract class ParameterizedValueType<T extends ParameterizedValueType, O extends XMLElement, V, P extends XMLElement> {
 
     private V value;
     private P param;
+    private O owner;
 
 
     /**
@@ -47,10 +48,22 @@ public abstract class ParameterizedValueType<T extends ParameterizedValueType, V
             throw new XMLException("null String.");
         if("".equals(value.trim()))
             throw new XMLException("Empty String");
+        if(value.contains("$"))
+            throw new XMLException("Invalid String content");
+        
+        this.value = createValue(value);
+    }
+
+
+    public ParameterizedValueType(String value, O owner) throws XMLException {
+        if(value == null)
+            throw new XMLException("null String.");
+        if("".equals(value.trim()))
+            throw new XMLException("Empty String");
 
         if(value.contains("$")){
             value = value.substring(1);
-            this.param = createParam(value);
+            this.param = createParam(value, owner);
         }
         else{
             this.value = createValue(value);
@@ -93,7 +106,7 @@ public abstract class ParameterizedValueType<T extends ParameterizedValueType, V
     }
 
 
-    protected abstract P createParam(String param) throws XMLException;
+    protected abstract P createParam(String param, O owner) throws XMLException;
 
 
     protected abstract V createValue(String value) throws XMLException;
