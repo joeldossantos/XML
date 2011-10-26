@@ -1,6 +1,6 @@
 package br.uff.midiacom.xml.datatype.reference;
 
-import br.uff.midiacom.xml.XMLElementPrototype;
+import br.uff.midiacom.xml.XMLElement;
 import br.uff.midiacom.xml.XMLException;
 
 
@@ -10,7 +10,7 @@ import br.uff.midiacom.xml.XMLException;
  * @param <E>
  *          the type of the referred document.
  */
-public class DocumentRefType<E extends XMLElementPrototype> extends ReferenceType<E> {
+public class DocumentRefType<E extends XMLElement> extends ReferenceType<E> {
 
 
     /**
