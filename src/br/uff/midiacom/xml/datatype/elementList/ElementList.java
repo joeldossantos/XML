@@ -184,4 +184,17 @@ public class ElementList<T extends XMLElement, P extends XMLElement> implements 
 
         return elements.get(i);
     }
+    
+    
+    /**
+     * Returns the position of an element.
+     *
+     * @param element
+     *          element to get the position.
+     * @return
+     *          the element position in the list.
+     */
+    public int getPosition(T element) {
+        return elements.indexOf(element);
+    }
 }

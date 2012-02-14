@@ -14,7 +14,7 @@ public class XMLElementImpl<T extends XMLIdentifiableElement, P extends XMLEleme
 
     public void setId(String id) throws XMLException {
         if(!validate(id))
-            throw new XMLException("Invalid identifier");
+            throw new XMLException("Invalid identifier: " + id);
 
         this.id = new StringType(id);
     }
