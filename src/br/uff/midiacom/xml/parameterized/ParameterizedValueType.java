@@ -2,13 +2,21 @@ package br.uff.midiacom.xml.parameterized;
 
 import br.uff.midiacom.xml.XMLElement;
 import br.uff.midiacom.xml.XMLException;
+import br.uff.midiacom.xml.datatype.reference.ReferenceType;
 
 
-public abstract class ParameterizedValueType<T extends ParameterizedValueType, O extends XMLElement, V, P extends XMLElement> {
+public abstract class ParameterizedValueType<T extends ParameterizedValueType,
+                                             O extends XMLElement,
+                                             P extends XMLElement,
+                                             V,
+                                             A,
+                                             R extends ReferenceType<O, P, A>> {
 
-    private V value;
-    private P param;
-    private O owner;
+    protected V value;
+    protected R param;
+    protected O owner;
+    
+    private String tempValue;
 
 
     /**
@@ -31,11 +39,11 @@ public abstract class ParameterizedValueType<T extends ParameterizedValueType, O
      * Creates a parameterized value as a parameter.
      *
      * @param value
-     *          element representing a parameter.
+     *          element representing a reference to a parameter.
      * @throws XMLException
      *          if the value is null.
      */
-    public ParameterizedValueType(P value) throws XMLException {
+    public ParameterizedValueType(R value) throws XMLException {
         if(value == null)
             throw new XMLException("null value.");
 
@@ -43,31 +51,25 @@ public abstract class ParameterizedValueType<T extends ParameterizedValueType, O
     }
 
 
+    /**
+     * Creates a parameterized value from a String.
+     * 
+     * @param value
+     *          String representing the parameterized value. If the value is a
+     *          reference to a parameter, it will be created when the
+     *          parameterized value is added to an XML element.
+     * @throws XMLException 
+     *          if the String is null, empty or has an invalid content.
+     */
     public ParameterizedValueType(String value) throws XMLException {
         if(value == null)
             throw new XMLException("null String.");
         if("".equals(value.trim()))
             throw new XMLException("Empty String");
         if(value.contains("$"))
-            throw new XMLException("Invalid String content");
-        
-        this.value = createValue(value);
-    }
-
-
-    public ParameterizedValueType(String value, O owner) throws XMLException {
-        if(value == null)
-            throw new XMLException("null String.");
-        if("".equals(value.trim()))
-            throw new XMLException("Empty String");
-
-        if(value.contains("$")){
-            value = value.substring(1);
-            this.param = createParam(value, owner);
-        }
-        else{
+            tempValue = value.substring(1);
+        else
             this.value = createValue(value);
-        }
     }
 
 
@@ -88,11 +90,58 @@ public abstract class ParameterizedValueType<T extends ParameterizedValueType, O
      * @return
      *          element representing a parameter.
      */
-    public P getParam() {
+    public R getParam() {
         return param;
+    }
+    
+    
+    /**
+     * Set the parameterized value owner and the attribute used to make the
+     * reference. If the value is a reference to a parameter, this method will
+     * also try to create the parameter reference.
+     * 
+     * @param owner
+     *          parameterized value owner element.
+     * @param ownerAtt
+     *          owner element attribute.
+     * @throws XMLException 
+     *          if any error occur while creating the parameter reference.
+     */
+    public void setOwner(O owner, A ownerAtt) throws XMLException {
+        this.owner = owner;
+        
+        // If the reference to the parameter needs to be created, creates it
+        if(tempValue != null)
+            this.param = createParam(tempValue, owner);
+        
+        // Set the reference owner and attribute
+        if(param != null){
+            param.setOwner(owner);
+            param.setOwnerAtt(ownerAtt);
+        }
+    }
+    
+    
+    /**
+     * Removes the owner of the parameterized value. If the value is a reference
+     * to a parameter, the parameter reference will be removed.
+     */
+    public void removeOwner() {
+        if(param != null){
+            param.clean();
+            param = null;
+        }
     }
 
 
+    /**
+     * Return the String representing the parameterized value.
+     * 
+     * @return 
+     *          String with the value representation. If the value refers to
+     *          a parameter, it will return the parameter name with the "$"
+     *          String.
+     */
     public String parse() {
         if(value != null)
             return getStringValue();
@@ -101,12 +150,20 @@ public abstract class ParameterizedValueType<T extends ParameterizedValueType, O
     }
 
 
+    /**
+     * Compares two parameterized values.
+     * 
+     * @param other
+     *          other parameterized value to make the comparison.
+     * @return 
+     *          true is the values are equal and false otherwise.
+     */
     public boolean compare(T other) {
         return parse().equals(other.parse());
     }
 
 
-    protected abstract P createParam(String param, O owner) throws XMLException;
+    protected abstract R createParam(String param, O owner) throws XMLException;
 
 
     protected abstract V createValue(String value) throws XMLException;
