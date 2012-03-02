@@ -1,5 +1,7 @@
 package br.uff.midiacom.xml;
 
+import org.w3c.dom.Element;
+
 
 /**
  * This interface defines the basic type of an XML element.
@@ -43,6 +45,17 @@ public interface XMLElement<T extends XMLElement, P extends XMLElement> {
      *          string representing the XML code.
      */
     public String parse(int ident);
+    
+    
+    /**
+     * Reads the XML code representing the XML element and creates the class.
+     * 
+     * @param element
+     *          representation of the element to read.
+     * @throws XMLException 
+     *          if any error occur.
+     */
+    public void load(Element element) throws XMLException;
 
 
     /**
