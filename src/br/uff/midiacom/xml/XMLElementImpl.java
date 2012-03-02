@@ -6,7 +6,8 @@ import br.uff.midiacom.xml.datatype.string.StringType;
 /**
  * This class implements methods of the NCLElement interface.
  */
-public class XMLElementImpl<T extends XMLIdentifiableElement, P extends XMLElement> {
+public class XMLElementImpl<T extends XMLIdentifiableElement,
+                            P extends XMLElement> {
 
     protected StringType id;
     protected P parent;

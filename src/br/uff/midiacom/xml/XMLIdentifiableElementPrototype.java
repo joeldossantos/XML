@@ -9,8 +9,11 @@ package br.uff.midiacom.xml;
  * @param <P>
  *          XML element parent type.
  */
-public abstract class XMLIdentifiableElementPrototype<T extends XMLIdentifiableElement, P extends XMLElement, I extends XMLElementImpl>
-        extends XMLElementPrototype<T, P, I> implements XMLIdentifiableElement<T, P> {
+public abstract class XMLIdentifiableElementPrototype<T extends XMLIdentifiableElement,
+                                                      P extends XMLElement,
+                                                      I extends XMLElementImpl>
+        extends XMLElementPrototype<T, P, I>
+        implements XMLIdentifiableElement<T, P> {
 
 
     public XMLIdentifiableElementPrototype() throws XMLException {

@@ -11,7 +11,8 @@ import org.w3c.dom.Element;
  * @param <P>
  *          XML element parent type.
  */
-public interface XMLElement<T extends XMLElement, P extends XMLElement> {
+public interface XMLElement<T extends XMLElement,
+                            P extends XMLElement> {
 
 
     /**

@@ -17,7 +17,9 @@ import java.util.List;
  * @param <P>
  *          type of the stored element parent.
  */
-public class ElementList<T extends XMLElement, P extends XMLElement> implements Iterable<T> {
+public class ElementList<T extends XMLElement,
+                         P extends XMLElement>
+        implements Iterable<T> {
 
     protected List<T> elements;
 

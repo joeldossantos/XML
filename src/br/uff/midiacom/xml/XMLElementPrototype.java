@@ -9,7 +9,9 @@ package br.uff.midiacom.xml;
  * @param <P>
  *          XML element parent type.
  */
-public abstract class XMLElementPrototype<T extends XMLElement, P extends XMLElement, I extends XMLElementImpl>
+public abstract class XMLElementPrototype<T extends XMLElement,
+                                          P extends XMLElement,
+                                          I extends XMLElementImpl>
         implements XMLElement<T, P> {
 
     protected I impl;

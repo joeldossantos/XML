@@ -14,7 +14,9 @@ import br.uff.midiacom.xml.XMLIdentifiableElement;
  * @param <P>
  *          type of the stored element parent.
  */
-public class IdentifiableElementList<T extends XMLIdentifiableElement, P extends XMLElement> extends ElementList<T, P> {
+public class IdentifiableElementList<T extends XMLIdentifiableElement,
+                                     P extends XMLElement>
+        extends ElementList<T, P> {
 
 
     /**
