@@ -2,11 +2,12 @@ package br.uff.midiacom.xml.datatype.reference;
 
 import br.uff.midiacom.xml.XMLElement;
 import br.uff.midiacom.xml.XMLException;
+import br.uff.midiacom.xml.aux.ComparableItem;
 
 
 /**
  * This class represents a reference inside an xml document.
- *
+ * 
  * @param <O>
  *          the type of the reference owner element.
  * @param <T>
@@ -15,7 +16,8 @@ import br.uff.midiacom.xml.XMLException;
  *          Representation of the language attribute names.
  */
 public abstract class ReferenceType<O extends XMLElement,
-                                    T extends XMLElement, A> {
+                                    T extends XMLElement, A>
+        implements ComparableItem<ReferenceType> {
 
     protected T target;
     protected A targetAtt;
@@ -153,9 +155,17 @@ public abstract class ReferenceType<O extends XMLElement,
     }
     
     
-    public void clean() {
+    public void clean() throws XMLException {
         if(target != null)
             ((ReferredElement) target).removeReference(this);
+    }
+    
+    
+    public boolean compare(ReferenceType other) {
+        if(other == null || other.getOwner() == null)
+            return false;
+        
+        return getOwner().compare(other.getOwner());
     }
 
 
@@ -165,5 +175,5 @@ public abstract class ReferenceType<O extends XMLElement,
      * @return
      *          string representing the element complete reference string.
      */
-    protected abstract String parse();
+    public abstract String parse();
 }

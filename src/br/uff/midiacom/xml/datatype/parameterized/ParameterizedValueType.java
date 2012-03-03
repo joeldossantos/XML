@@ -1,4 +1,4 @@
-package br.uff.midiacom.xml.parameterized;
+package br.uff.midiacom.xml.datatype.parameterized;
 
 import br.uff.midiacom.xml.XMLElement;
 import br.uff.midiacom.xml.XMLException;
@@ -126,7 +126,7 @@ public abstract class ParameterizedValueType<T extends ParameterizedValueType,
      * Removes the owner of the parameterized value. If the value is a reference
      * to a parameter, the parameter reference will be removed.
      */
-    public void removeOwner() {
+    public void removeOwner() throws XMLException {
         if(param != null){
             param.clean();
             param = null;
