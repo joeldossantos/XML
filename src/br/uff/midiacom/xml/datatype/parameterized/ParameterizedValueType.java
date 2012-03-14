@@ -7,10 +7,9 @@ import br.uff.midiacom.xml.datatype.reference.ReferenceType;
 
 public abstract class ParameterizedValueType<T extends ParameterizedValueType,
                                              O extends XMLElement,
-                                             P extends XMLElement,
                                              V,
                                              A,
-                                             R extends ReferenceType<O, P, A>> {
+                                             R extends ReferenceType> {
 
     protected V value;
     protected R param;

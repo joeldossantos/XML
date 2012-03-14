@@ -16,7 +16,8 @@ import br.uff.midiacom.xml.aux.ComparableItem;
  *          Representation of the language attribute names.
  */
 public abstract class ReferenceType<O extends XMLElement,
-                                    T extends XMLElement, A>
+                                    T extends ReferredElement,
+                                    A>
         implements ComparableItem<ReferenceType> {
 
     protected T target;
@@ -54,8 +55,6 @@ public abstract class ReferenceType<O extends XMLElement,
     private void setTarget(T target) throws XMLException {
         if(target == null)
             throw new XMLException("Null target element.");
-        if(!(target instanceof ReferredElement))
-            throw new XMLException("Wrong target element type.");
         
         this.target = target;
         ((ReferredElement) this.target).addReference(this);
